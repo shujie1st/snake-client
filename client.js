@@ -6,6 +6,14 @@ const connect = function() {
     host: "localhost",
     port: 50541,
   });
+
+  // print a message for the player
+  // and send name to server
+  // when the connection is successfully established
+  conn.on("connect", () => {
+    console.log("Successfully connected to game server");
+    conn.write("Name: SJM");
+  });
   
   // handle and print incoming data from server
   conn.on("data", (data) => {
