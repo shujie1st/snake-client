@@ -1,3 +1,5 @@
+const { MOVE_UP_KEY, MOVE_LEFT_KEY, MOVE_DOWN_KEY, MOVE_RIGTH_KEY, keyForMessages } = require("./constants");
+
 // stores the active TCP connection object.
 let connection;
 
@@ -11,24 +13,22 @@ const setupInput = (conn) => {
   stdin.resume();
 
   // handle user input from keyboard
-  // "ctrl" + "c": to terminate the game
-  // "w", "a", "s", "d": to send movement commands
-  //"z", "m": to send messages to server
+  // use "ctrl" + "c" to terminate the game
+  // send movement command by pressing pre-defined keys
+  // use keyboard input to send messages to server
   const handleUserInput = function(key) {
     if (key === '\u0003') {
       process.exit();
-    } else if (key === 'w') {
+    } else if (key === MOVE_UP_KEY) {
       connection.write('Move: up');
-    } else if (key === 'a') {
+    } else if (key === MOVE_LEFT_KEY) {
       connection.write('Move: left');
-    } else if (key === 's') {
+    } else if (key === MOVE_DOWN_KEY) {
       connection.write('Move: down');
-    } else if (key === 'd') {
+    } else if (key === MOVE_RIGTH_KEY) {
       connection.write('Move: right');
-    } else if (key === 'z') {
-      connection.write('Say: Hello there!');
-    } else if (key === 'm') {
-      connection.write('Say: Well done!');
+    } else if (keyForMessages[key]) {
+      connection.write(keyForMessages[key]);
     }
   };
   stdin.on("data", handleUserInput);
