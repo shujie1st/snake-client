@@ -13,6 +13,7 @@ const setupInput = (conn) => {
   // handle user input from keyboard
   // "ctrl" + "c": to terminate the game
   // "w", "a", "s", "d": to send movement commands
+  //"z", "m": to send messages to server
   const handleUserInput = function(key) {
     if (key === '\u0003') {
       process.exit();
@@ -24,6 +25,10 @@ const setupInput = (conn) => {
       connection.write('Move: down');
     } else if (key === 'd') {
       connection.write('Move: right');
+    } else if (key === 'z') {
+      connection.write('Say: Hello there!');
+    } else if (key === 'm') {
+      connection.write('Say: Well done!');
     }
   };
   stdin.on("data", handleUserInput);
