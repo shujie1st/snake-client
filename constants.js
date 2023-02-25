@@ -15,9 +15,6 @@ const keyForMessages = {
   m: "Say: Well done!"
 };
 
-
-
-
 module.exports = {
   IP,
   PORT,
